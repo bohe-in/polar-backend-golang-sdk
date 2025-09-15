@@ -1,0 +1,528 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Polar Backend SDK Server",
+        "description": "Backend SDK API for polar",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/health/": {
+            "get": {
+                "tags": [
+                    "Health"
+                ],
+                "operationId": "Health",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "Access-Control-Allow-Headers": {
+                                "description": "allowed headers",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "description": "allowed methods",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "Access-Control-Allow-Origin": {
+                                "description": "allowed origin",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "Origin": {
+                                "description": "allow everywhere",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponsesSuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "headers": {
+                            "Access-Control-Allow-Headers": {
+                                "description": "allowed headers",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "description": "allowed methods",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "Access-Control-Allow-Origin": {
+                                "description": "allowed origin",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "Origin": {
+                                "description": "allow everywhere",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponsesErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-amazon-apigateway-integration": {
+                    "type": "http",
+                    "uri": "http://${stageVariables.url}/api/v1/health/",
+                    "httpMethod": "get",
+                    "requestParameters": {
+                        "integration.request.header.api-gtway-ip": "context.identity.sourceIp",
+                        "integration.request.header.x-api-key": "context.identity.apiKey"
+                    },
+                    "responses": {
+                        "200": {
+                            "statusCode": "200",
+                            "responseParameters": {
+                                "method.response.header.Access-Control-Allow-Headers": "integration.response.header.Access-Control-Allow-Headers",
+                                "method.response.header.Access-Control-Allow-Methods": "integration.response.header.Access-Control-Allow-Methods",
+                                "method.response.header.Access-Control-Allow-Origin": "integration.response.header.Access-Control-Allow-Origin",
+                                "method.response.header.Origin": "integration.response.header.Origin"
+                            }
+                        },
+                        "400": {
+                            "statusCode": "400",
+                            "responseParameters": {
+                                "method.response.header.Access-Control-Allow-Headers": "integration.response.header.Access-Control-Allow-Headers",
+                                "method.response.header.Access-Control-Allow-Methods": "integration.response.header.Access-Control-Allow-Methods",
+                                "method.response.header.Access-Control-Allow-Origin": "integration.response.header.Access-Control-Allow-Origin",
+                                "method.response.header.Origin": "integration.response.header.Origin"
+                            }
+                        }
+                    }
+                }
+            },
+            "options": {
+                "tags": [
+                    "Health"
+                ],
+                "operationId": "HealthOptions",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "Access-Control-Allow-Headers": {
+                                "description": "allowed headers",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "description": "allowed methods",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "Access-Control-Allow-Origin": {
+                                "description": "allowed origin",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "Origin": {
+                                "description": "allow everywhere",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponsesSuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "headers": {
+                            "Access-Control-Allow-Headers": {
+                                "description": "allowed headers",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "description": "allowed methods",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "Access-Control-Allow-Origin": {
+                                "description": "allowed origin",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "Origin": {
+                                "description": "allow everywhere",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponsesErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-amazon-apigateway-integration": {
+                    "type": "http",
+                    "uri": "http://${stageVariables.url}/api/v1/health/",
+                    "httpMethod": "options",
+                    "requestParameters": {
+                        "integration.request.header.api-gtway-ip": "context.identity.sourceIp",
+                        "integration.request.header.x-api-key": "context.identity.apiKey"
+                    },
+                    "responses": {
+                        "200": {
+                            "statusCode": "200",
+                            "responseParameters": {
+                                "method.response.header.Access-Control-Allow-Headers": "integration.response.header.Access-Control-Allow-Headers",
+                                "method.response.header.Access-Control-Allow-Methods": "integration.response.header.Access-Control-Allow-Methods",
+                                "method.response.header.Access-Control-Allow-Origin": "integration.response.header.Access-Control-Allow-Origin",
+                                "method.response.header.Origin": "integration.response.header.Origin"
+                            }
+                        },
+                        "400": {
+                            "statusCode": "400",
+                            "responseParameters": {
+                                "method.response.header.Access-Control-Allow-Headers": "integration.response.header.Access-Control-Allow-Headers",
+                                "method.response.header.Access-Control-Allow-Methods": "integration.response.header.Access-Control-Allow-Methods",
+                                "method.response.header.Access-Control-Allow-Origin": "integration.response.header.Access-Control-Allow-Origin",
+                                "method.response.header.Origin": "integration.response.header.Origin"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/links": {
+            "post": {
+                "operationId": "CreateLink",
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-api-secret",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "analyticsTags": {
+                                        "$ref": "#/components/schemas/RequestsLinkAnalyticTags"
+                                    },
+                                    "data": {
+                                        "type": "object",
+                                        "additionalProperties": {}
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "redirects": {
+                                        "$ref": "#/components/schemas/RequestsLinkRedirects"
+                                    },
+                                    "socialMediaTags": {
+                                        "$ref": "#/components/schemas/RequestsLinkSocialMediaTags"
+                                    }
+                                },
+                                "title": "BeSdkCreateLinkRequest",
+                                "required": [
+                                    "name"
+                                ]
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponsesSdkLinkResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponsesErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-amazon-apigateway-integration": {
+                    "type": "http",
+                    "uri": "http://${stageVariables.url}/api/v1/links",
+                    "httpMethod": "post",
+                    "requestParameters": {
+                        "integration.request.header.api-gtway-ip": "context.identity.sourceIp",
+                        "integration.request.header.x-api-key": "context.identity.apiKey",
+                        "integration.request.header.x-api-secret": "method.request.header.x-api-secret"
+                    },
+                    "responses": {
+                        "200": {
+                            "statusCode": "200",
+                            "responseParameters": {}
+                        },
+                        "400": {
+                            "statusCode": "400",
+                            "responseParameters": {}
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "RequestsLinkAnalyticTags": {
+                "type": "object",
+                "properties": {
+                    "campaign": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "channel": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "feature": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "tags": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                }
+            },
+            "RequestsLinkRedirects": {
+                "type": "object",
+                "properties": {
+                    "androidRedirect": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "desktopRedirect": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "iosRedirect": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "webOnly": {
+                        "type": "boolean",
+                        "nullable": true
+                    }
+                }
+            },
+            "RequestsLinkSocialMediaTags": {
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "description",
+                    "title"
+                ]
+            },
+            "ResponsesErrorDetails": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "statusCode": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "ResponsesErrorResponse": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "$ref": "#/components/schemas/ResponsesErrorDetails"
+                    },
+                    "requestId": {
+                        "type": "string"
+                    },
+                    "version": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ResponsesLinkAnalyticTags": {
+                "type": "object",
+                "properties": {
+                    "campaign": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "channel": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "feature": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "tags": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "required": [
+                    "campaign",
+                    "channel",
+                    "feature",
+                    "tags"
+                ]
+            },
+            "ResponsesLinkSocialMediaTags": {
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "description",
+                    "title"
+                ]
+            },
+            "ResponsesSdkLink": {
+                "type": "object",
+                "properties": {
+                    "analyticsTags": {
+                        "$ref": "#/components/schemas/ResponsesLinkAnalyticTags"
+                    },
+                    "data": {
+                        "type": "object",
+                        "additionalProperties": {}
+                    },
+                    "slug": {
+                        "type": "string"
+                    },
+                    "socialMediaTags": {
+                        "$ref": "#/components/schemas/ResponsesLinkSocialMediaTags"
+                    },
+                    "url": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ResponsesSdkLinkResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "sdkLinkData": {
+                                "$ref": "#/components/schemas/ResponsesSdkLink"
+                            }
+                        }
+                    },
+                    "requestID": {
+                        "type": "string"
+                    },
+                    "version": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ResponsesSuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "requestID": {
+                        "type": "string"
+                    },
+                    "version": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "api_key": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "x-api-key"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Health",
+            "description": "Health related routes"
+        }
+    ]
+}

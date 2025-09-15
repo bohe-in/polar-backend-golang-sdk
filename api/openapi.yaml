@@ -1,0 +1,477 @@
+openapi: 3.0.1
+info:
+  description: Backend SDK API for polar
+  title: Polar Backend SDK Server
+  version: 1.0.0
+servers:
+- url: /
+tags:
+- description: Health related routes
+  name: Health
+paths:
+  /api/v1/health/:
+    get:
+      operationId: Health
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponsesSuccessResponse'
+          description: OK
+          headers:
+            Access-Control-Allow-Headers:
+              description: allowed headers
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Access-Control-Allow-Methods:
+              description: allowed methods
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Access-Control-Allow-Origin:
+              description: allowed origin
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Origin:
+              description: allow everywhere
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponsesErrorResponse'
+          description: Bad Request
+          headers:
+            Access-Control-Allow-Headers:
+              description: allowed headers
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Access-Control-Allow-Methods:
+              description: allowed methods
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Access-Control-Allow-Origin:
+              description: allowed origin
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Origin:
+              description: allow everywhere
+              explode: false
+              schema:
+                type: string
+              style: simple
+      tags:
+      - Health
+      x-amazon-apigateway-integration:
+        type: http
+        uri: "http://${stageVariables.url}/api/v1/health/"
+        httpMethod: get
+        requestParameters:
+          integration.request.header.api-gtway-ip: context.identity.sourceIp
+          integration.request.header.x-api-key: context.identity.apiKey
+        responses:
+          "200":
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Headers: integration.response.header.Access-Control-Allow-Headers
+              method.response.header.Access-Control-Allow-Methods: integration.response.header.Access-Control-Allow-Methods
+              method.response.header.Access-Control-Allow-Origin: integration.response.header.Access-Control-Allow-Origin
+              method.response.header.Origin: integration.response.header.Origin
+          "400":
+            statusCode: "400"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Headers: integration.response.header.Access-Control-Allow-Headers
+              method.response.header.Access-Control-Allow-Methods: integration.response.header.Access-Control-Allow-Methods
+              method.response.header.Access-Control-Allow-Origin: integration.response.header.Access-Control-Allow-Origin
+              method.response.header.Origin: integration.response.header.Origin
+    options:
+      operationId: HealthOptions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponsesSuccessResponse'
+          description: OK
+          headers:
+            Access-Control-Allow-Headers:
+              description: allowed headers
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Access-Control-Allow-Methods:
+              description: allowed methods
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Access-Control-Allow-Origin:
+              description: allowed origin
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Origin:
+              description: allow everywhere
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponsesErrorResponse'
+          description: Bad Request
+          headers:
+            Access-Control-Allow-Headers:
+              description: allowed headers
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Access-Control-Allow-Methods:
+              description: allowed methods
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Access-Control-Allow-Origin:
+              description: allowed origin
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Origin:
+              description: allow everywhere
+              explode: false
+              schema:
+                type: string
+              style: simple
+      tags:
+      - Health
+      x-amazon-apigateway-integration:
+        type: http
+        uri: "http://${stageVariables.url}/api/v1/health/"
+        httpMethod: options
+        requestParameters:
+          integration.request.header.api-gtway-ip: context.identity.sourceIp
+          integration.request.header.x-api-key: context.identity.apiKey
+        responses:
+          "200":
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Headers: integration.response.header.Access-Control-Allow-Headers
+              method.response.header.Access-Control-Allow-Methods: integration.response.header.Access-Control-Allow-Methods
+              method.response.header.Access-Control-Allow-Origin: integration.response.header.Access-Control-Allow-Origin
+              method.response.header.Origin: integration.response.header.Origin
+          "400":
+            statusCode: "400"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Headers: integration.response.header.Access-Control-Allow-Headers
+              method.response.header.Access-Control-Allow-Methods: integration.response.header.Access-Control-Allow-Methods
+              method.response.header.Access-Control-Allow-Origin: integration.response.header.Access-Control-Allow-Origin
+              method.response.header.Origin: integration.response.header.Origin
+  /api/v1/links:
+    post:
+      operationId: CreateLink
+      parameters:
+      - explode: false
+        in: header
+        name: x-api-key
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: header
+        name: x-api-secret
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BeSdkCreateLinkRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponsesSdkLinkResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponsesErrorResponse'
+          description: Bad Request
+      security:
+      - api_key: []
+      x-amazon-apigateway-integration:
+        type: http
+        uri: "http://${stageVariables.url}/api/v1/links"
+        httpMethod: post
+        requestParameters:
+          integration.request.header.api-gtway-ip: context.identity.sourceIp
+          integration.request.header.x-api-key: context.identity.apiKey
+          integration.request.header.x-api-secret: method.request.header.x-api-secret
+        responses:
+          "200":
+            statusCode: "200"
+            responseParameters: {}
+          "400":
+            statusCode: "400"
+            responseParameters: {}
+components:
+  schemas:
+    RequestsLinkAnalyticTags:
+      example:
+        feature: feature
+        channel: channel
+        campaign: campaign
+        tags: tags
+      properties:
+        campaign:
+          nullable: true
+          type: string
+        channel:
+          nullable: true
+          type: string
+        feature:
+          nullable: true
+          type: string
+        tags:
+          nullable: true
+          type: string
+      type: object
+    RequestsLinkRedirects:
+      example:
+        iosRedirect: iosRedirect
+        webOnly: true
+        desktopRedirect: desktopRedirect
+        androidRedirect: androidRedirect
+      properties:
+        androidRedirect:
+          nullable: true
+          type: string
+        desktopRedirect:
+          nullable: true
+          type: string
+        iosRedirect:
+          nullable: true
+          type: string
+        webOnly:
+          nullable: true
+          type: boolean
+      type: object
+    RequestsLinkSocialMediaTags:
+      example:
+        description: description
+        title: title
+      properties:
+        description:
+          type: string
+        title:
+          type: string
+      required:
+      - description
+      - title
+      type: object
+    ResponsesErrorDetails:
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        statusCode:
+          format: int32
+          type: integer
+      type: object
+    ResponsesErrorResponse:
+      properties:
+        error:
+          $ref: '#/components/schemas/ResponsesErrorDetails'
+        requestId:
+          type: string
+        version:
+          type: string
+      type: object
+    ResponsesLinkAnalyticTags:
+      example:
+        feature: feature
+        channel: channel
+        campaign: campaign
+        tags: tags
+      properties:
+        campaign:
+          nullable: true
+          type: string
+        channel:
+          nullable: true
+          type: string
+        feature:
+          nullable: true
+          type: string
+        tags:
+          nullable: true
+          type: string
+      required:
+      - campaign
+      - channel
+      - feature
+      - tags
+      type: object
+    ResponsesLinkSocialMediaTags:
+      example:
+        description: description
+        title: title
+      properties:
+        description:
+          type: string
+        title:
+          type: string
+      required:
+      - description
+      - title
+      type: object
+    ResponsesSdkLink:
+      example:
+        data:
+          key: ""
+        analyticsTags:
+          feature: feature
+          channel: channel
+          campaign: campaign
+          tags: tags
+        socialMediaTags:
+          description: description
+          title: title
+        slug: slug
+        url: url
+      properties:
+        analyticsTags:
+          $ref: '#/components/schemas/ResponsesLinkAnalyticTags'
+        data:
+          additionalProperties: {}
+          type: object
+        slug:
+          type: string
+        socialMediaTags:
+          $ref: '#/components/schemas/ResponsesLinkSocialMediaTags'
+        url:
+          type: string
+      type: object
+    ResponsesSdkLinkResponse:
+      example:
+        data:
+          sdkLinkData:
+            data:
+              key: ""
+            analyticsTags:
+              feature: feature
+              channel: channel
+              campaign: campaign
+              tags: tags
+            socialMediaTags:
+              description: description
+              title: title
+            slug: slug
+            url: url
+        requestID: requestID
+        version: version
+      properties:
+        data:
+          $ref: '#/components/schemas/ResponsesSdkLinkResponse_data'
+        requestID:
+          type: string
+        version:
+          type: string
+      type: object
+    ResponsesSuccessResponse:
+      example:
+        requestID: requestID
+        version: version
+      properties:
+        requestID:
+          type: string
+        version:
+          type: string
+      type: object
+    BeSdkCreateLinkRequest:
+      example:
+        data:
+          key: ""
+        redirects:
+          iosRedirect: iosRedirect
+          webOnly: true
+          desktopRedirect: desktopRedirect
+          androidRedirect: androidRedirect
+        analyticsTags:
+          feature: feature
+          channel: channel
+          campaign: campaign
+          tags: tags
+        name: name
+        socialMediaTags:
+          description: description
+          title: title
+      properties:
+        analyticsTags:
+          $ref: '#/components/schemas/RequestsLinkAnalyticTags'
+        data:
+          additionalProperties: {}
+          type: object
+        name:
+          type: string
+        redirects:
+          $ref: '#/components/schemas/RequestsLinkRedirects'
+        socialMediaTags:
+          $ref: '#/components/schemas/RequestsLinkSocialMediaTags'
+      required:
+      - name
+      title: BeSdkCreateLinkRequest
+      type: object
+    ResponsesSdkLinkResponse_data:
+      example:
+        sdkLinkData:
+          data:
+            key: ""
+          analyticsTags:
+            feature: feature
+            channel: channel
+            campaign: campaign
+            tags: tags
+          socialMediaTags:
+            description: description
+            title: title
+          slug: slug
+          url: url
+      properties:
+        sdkLinkData:
+          $ref: '#/components/schemas/ResponsesSdkLink'
+      type: object
+  securitySchemes:
+    api_key:
+      in: header
+      name: x-api-key
+      type: apiKey
