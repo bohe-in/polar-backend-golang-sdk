@@ -1,4 +1,4 @@
-# Go API client for linkattribution
+# Go API client for polar
 
 Backend SDK API for polar
 
@@ -21,7 +21,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```golang
-import linkattribution "github.com/bohe-in/link-attribution-server-golang-sdk"
+import polar "github.com/bohe-in/polar-backend-golang-sdk"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:
@@ -39,7 +39,7 @@ Default configuration comes with `Servers` field that contains server objects as
 For using other server than the one defined on index 0 set context value `sw.ContextServerIndex` of type `int`.
 
 ```golang
-ctx := context.WithValue(context.Background(), linkattribution.ContextServerIndex, 1)
+ctx := context.WithValue(context.Background(), polar.ContextServerIndex, 1)
 ```
 
 ### Templated Server URL
@@ -47,7 +47,7 @@ ctx := context.WithValue(context.Background(), linkattribution.ContextServerInde
 Templated server URL is formatted using default variables from configuration or from context value `sw.ContextServerVariables` of type `map[string]string`.
 
 ```golang
-ctx := context.WithValue(context.Background(), linkattribution.ContextServerVariables, map[string]string{
+ctx := context.WithValue(context.Background(), polar.ContextServerVariables, map[string]string{
 	"basePath": "v2",
 })
 ```
@@ -61,10 +61,10 @@ An operation is uniquely identified by `"{classname}Service.{nickname}"` string.
 Similar rules for overriding default operation server index and variables applies by using `sw.ContextOperationServerIndices` and `sw.ContextOperationServerVariables` context maps.
 
 ```golang
-ctx := context.WithValue(context.Background(), linkattribution.ContextOperationServerIndices, map[string]int{
+ctx := context.WithValue(context.Background(), polar.ContextOperationServerIndices, map[string]int{
 	"{classname}Service.{nickname}": 2,
 })
-ctx = context.WithValue(context.Background(), linkattribution.ContextOperationServerVariables, map[string]map[string]string{
+ctx = context.WithValue(context.Background(), polar.ContextOperationServerVariables, map[string]map[string]string{
 	"{classname}Service.{nickname}": {
 		"port": "8443",
 	},

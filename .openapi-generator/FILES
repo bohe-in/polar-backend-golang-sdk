@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 README.md
 api/openapi.yaml
@@ -37,6 +36,4 @@ model_responses_sdk_link_response.go
 model_responses_sdk_link_response_data.go
 model_responses_success_response.go
 response.go
-test/api_default_test.go
-test/api_health_test.go
 utils.go

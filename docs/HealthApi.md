@@ -24,7 +24,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/bohe-in/link-attribution-server-golang-sdk"
+    openapiclient "github.com/bohe-in/polar-backend-golang-sdk"
 )
 
 func main() {
@@ -83,7 +83,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/bohe-in/link-attribution-server-golang-sdk"
+    openapiclient "github.com/bohe-in/polar-backend-golang-sdk"
 )
 
 func main() {

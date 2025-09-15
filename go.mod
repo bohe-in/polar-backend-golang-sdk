@@ -1,4 +1,4 @@
-module github.com/bohe-in/link-attribution-server-golang-sdk
+module github.com/bohe-in/polar-backend-golang-sdk
 
 go 1.18
 
