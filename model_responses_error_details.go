@@ -20,6 +20,7 @@ var _ MappedNullable = &ResponsesErrorDetails{}
 // ResponsesErrorDetails struct for ResponsesErrorDetails
 type ResponsesErrorDetails struct {
 	Code *string `json:"code,omitempty"`
+	Details interface{} `json:"details,omitempty"`
 	Message *string `json:"message,omitempty"`
 	StatusCode *int32 `json:"statusCode,omitempty"`
 }
@@ -71,6 +72,39 @@ func (o *ResponsesErrorDetails) HasCode() bool {
 // SetCode gets a reference to the given string and assigns it to the Code field.
 func (o *ResponsesErrorDetails) SetCode(v string) {
 	o.Code = &v
+}
+
+// GetDetails returns the Details field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ResponsesErrorDetails) GetDetails() interface{} {
+	if o == nil {
+		var ret interface{}
+		return ret
+	}
+	return o.Details
+}
+
+// GetDetailsOk returns a tuple with the Details field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ResponsesErrorDetails) GetDetailsOk() (*interface{}, bool) {
+	if o == nil || IsNil(o.Details) {
+		return nil, false
+	}
+	return &o.Details, true
+}
+
+// HasDetails returns a boolean if a field has been set.
+func (o *ResponsesErrorDetails) HasDetails() bool {
+	if o != nil && IsNil(o.Details) {
+		return true
+	}
+
+	return false
+}
+
+// SetDetails gets a reference to the given interface{} and assigns it to the Details field.
+func (o *ResponsesErrorDetails) SetDetails(v interface{}) {
+	o.Details = v
 }
 
 // GetMessage returns the Message field value if set, zero value otherwise.
@@ -149,6 +183,9 @@ func (o ResponsesErrorDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Code) {
 		toSerialize["code"] = o.Code
+	}
+	if o.Details != nil {
+		toSerialize["details"] = o.Details
 	}
 	if !IsNil(o.Message) {
 		toSerialize["message"] = o.Message

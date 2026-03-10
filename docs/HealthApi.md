@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## Health
 
-> ResponsesSuccessResponse Health(ctx).Execute()
+> ResponsesSuccessResponse Health(ctx).Origin(origin).Execute()
 
 
 
@@ -28,10 +28,11 @@ import (
 )
 
 func main() {
+    origin := "origin_example" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.HealthApi.Health(context.Background()).Execute()
+    resp, r, err := apiClient.HealthApi.Health(context.Background()).Origin(origin).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `HealthApi.Health``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -43,12 +44,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiHealthRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **origin** | **string** |  | 
 
 ### Return type
 
@@ -70,7 +75,7 @@ No authorization required
 
 ## HealthOptions
 
-> ResponsesSuccessResponse HealthOptions(ctx).Execute()
+> ResponsesSuccessResponse HealthOptions(ctx).Origin(origin).Execute()
 
 
 
@@ -87,10 +92,11 @@ import (
 )
 
 func main() {
+    origin := "origin_example" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.HealthApi.HealthOptions(context.Background()).Execute()
+    resp, r, err := apiClient.HealthApi.HealthOptions(context.Background()).Origin(origin).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `HealthApi.HealthOptions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -102,12 +108,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiHealthOptionsRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **origin** | **string** |  | 
 
 ### Return type
 

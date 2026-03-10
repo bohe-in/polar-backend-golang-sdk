@@ -7,6 +7,9 @@ api_health.go
 client.go
 configuration.go
 docs/BeSdkCreateLinkRequest.md
+docs/BeSdkRunEmailCampaignRequest.md
+docs/BeSdkRunPushCampaignRequest.md
+docs/BeSdkUserProfileUpdateRequest.md
 docs/DefaultApi.md
 docs/HealthApi.md
 docs/RequestsLinkAnalyticTags.md
@@ -24,6 +27,9 @@ git_push.sh
 go.mod
 go.sum
 model_be_sdk_create_link_request.go
+model_be_sdk_run_email_campaign_request.go
+model_be_sdk_run_push_campaign_request.go
+model_be_sdk_user_profile_update_request.go
 model_requests_link_analytic_tags.go
 model_requests_link_redirects.go
 model_requests_link_social_media_tags.go

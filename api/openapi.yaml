@@ -9,9 +9,125 @@ tags:
 - description: Health related routes
   name: Health
 paths:
+  /api/v1/campaigns/email/run:
+    post:
+      operationId: RunEmailCampaign
+      parameters:
+      - explode: false
+        in: header
+        name: x-api-key
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: header
+        name: x-api-secret
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BeSdkRunEmailCampaignRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponsesSuccessResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponsesErrorResponse'
+          description: Bad Request
+      security:
+      - api_key: []
+      x-amazon-apigateway-integration:
+        type: http
+        uri: "http://${stageVariables.url}/api/v1/campaigns/email/run"
+        httpMethod: post
+        requestParameters:
+          integration.request.header.api-gtway-ip: context.identity.sourceIp
+          integration.request.header.x-api-key: context.identity.apiKey
+          integration.request.header.x-api-secret: method.request.header.x-api-secret
+        responses:
+          "200":
+            statusCode: "200"
+            responseParameters: {}
+          "400":
+            statusCode: "400"
+            responseParameters: {}
+  /api/v1/campaigns/push/run:
+    post:
+      operationId: RunPushCampaign
+      parameters:
+      - explode: false
+        in: header
+        name: x-api-key
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: header
+        name: x-api-secret
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BeSdkRunPushCampaignRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponsesSuccessResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponsesErrorResponse'
+          description: Bad Request
+      security:
+      - api_key: []
+      x-amazon-apigateway-integration:
+        type: http
+        uri: "http://${stageVariables.url}/api/v1/campaigns/push/run"
+        httpMethod: post
+        requestParameters:
+          integration.request.header.api-gtway-ip: context.identity.sourceIp
+          integration.request.header.x-api-key: context.identity.apiKey
+          integration.request.header.x-api-secret: method.request.header.x-api-secret
+        responses:
+          "200":
+            statusCode: "200"
+            responseParameters: {}
+          "400":
+            statusCode: "400"
+            responseParameters: {}
   /api/v1/health/:
     get:
       operationId: Health
+      parameters:
+      - explode: false
+        in: header
+        name: Origin
+        required: false
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           content:
@@ -82,6 +198,7 @@ paths:
         uri: "http://${stageVariables.url}/api/v1/health/"
         httpMethod: get
         requestParameters:
+          integration.request.header.Origin: method.request.header.Origin
           integration.request.header.api-gtway-ip: context.identity.sourceIp
           integration.request.header.x-api-key: context.identity.apiKey
         responses:
@@ -101,6 +218,14 @@ paths:
               method.response.header.Origin: integration.response.header.Origin
     options:
       operationId: HealthOptions
+      parameters:
+      - explode: false
+        in: header
+        name: Origin
+        required: false
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           content:
@@ -171,6 +296,7 @@ paths:
         uri: "http://${stageVariables.url}/api/v1/health/"
         httpMethod: options
         requestParameters:
+          integration.request.header.Origin: method.request.header.Origin
           integration.request.header.api-gtway-ip: context.identity.sourceIp
           integration.request.header.x-api-key: context.identity.apiKey
         responses:
@@ -242,6 +368,60 @@ paths:
           "400":
             statusCode: "400"
             responseParameters: {}
+  /api/v1/users/profile:
+    post:
+      operationId: UpdateUserProfile
+      parameters:
+      - explode: false
+        in: header
+        name: x-api-key
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: header
+        name: x-api-secret
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BeSdkUserProfileUpdateRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponsesSuccessResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponsesErrorResponse'
+          description: Bad Request
+      security:
+      - api_key: []
+      x-amazon-apigateway-integration:
+        type: http
+        uri: "http://${stageVariables.url}/api/v1/users/profile"
+        httpMethod: post
+        requestParameters:
+          integration.request.header.api-gtway-ip: context.identity.sourceIp
+          integration.request.header.x-api-key: context.identity.apiKey
+          integration.request.header.x-api-secret: method.request.header.x-api-secret
+        responses:
+          "200":
+            statusCode: "200"
+            responseParameters: {}
+          "400":
+            statusCode: "400"
+            responseParameters: {}
 components:
   schemas:
     RequestsLinkAnalyticTags:
@@ -301,6 +481,7 @@ components:
       properties:
         code:
           type: string
+        details: {}
         message:
           type: string
         statusCode:
@@ -417,6 +598,26 @@ components:
         version:
           type: string
       type: object
+    BeSdkRunEmailCampaignRequest:
+      example:
+        campaignUnid: campaignUnid
+      properties:
+        campaignUnid:
+          type: string
+      required:
+      - campaignUnid
+      title: BeSdkRunEmailCampaignRequest
+      type: object
+    BeSdkRunPushCampaignRequest:
+      example:
+        campaignUnid: campaignUnid
+      properties:
+        campaignUnid:
+          type: string
+      required:
+      - campaignUnid
+      title: BeSdkRunPushCampaignRequest
+      type: object
     BeSdkCreateLinkRequest:
       example:
         data:
@@ -450,6 +651,24 @@ components:
       required:
       - name
       title: BeSdkCreateLinkRequest
+      type: object
+    BeSdkUserProfileUpdateRequest:
+      example:
+        data:
+          key: ""
+        clobberMatchingAttributes: true
+        userID: userID
+      properties:
+        clobberMatchingAttributes:
+          type: boolean
+        data:
+          additionalProperties: {}
+          type: object
+        userID:
+          type: string
+      required:
+      - data
+      title: BeSdkUserProfileUpdateRequest
       type: object
     ResponsesSdkLinkResponse_data:
       example:

@@ -173,3 +173,459 @@ func (a *DefaultApiService) CreateLinkExecute(r ApiCreateLinkRequest) (*Response
 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
+
+type ApiRunEmailCampaignRequest struct {
+	ctx context.Context
+	ApiService *DefaultApiService
+	xApiKey *string
+	xApiSecret *string
+	beSdkRunEmailCampaignRequest *BeSdkRunEmailCampaignRequest
+}
+
+func (r ApiRunEmailCampaignRequest) XApiKey(xApiKey string) ApiRunEmailCampaignRequest {
+	r.xApiKey = &xApiKey
+	return r
+}
+
+func (r ApiRunEmailCampaignRequest) XApiSecret(xApiSecret string) ApiRunEmailCampaignRequest {
+	r.xApiSecret = &xApiSecret
+	return r
+}
+
+func (r ApiRunEmailCampaignRequest) BeSdkRunEmailCampaignRequest(beSdkRunEmailCampaignRequest BeSdkRunEmailCampaignRequest) ApiRunEmailCampaignRequest {
+	r.beSdkRunEmailCampaignRequest = &beSdkRunEmailCampaignRequest
+	return r
+}
+
+func (r ApiRunEmailCampaignRequest) Execute() (*ResponsesSuccessResponse, *http.Response, error) {
+	return r.ApiService.RunEmailCampaignExecute(r)
+}
+
+/*
+RunEmailCampaign Method for RunEmailCampaign
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiRunEmailCampaignRequest
+*/
+func (a *DefaultApiService) RunEmailCampaign(ctx context.Context) ApiRunEmailCampaignRequest {
+	return ApiRunEmailCampaignRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return ResponsesSuccessResponse
+func (a *DefaultApiService) RunEmailCampaignExecute(r ApiRunEmailCampaignRequest) (*ResponsesSuccessResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponsesSuccessResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultApiService.RunEmailCampaign")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/campaigns/email/run"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.xApiKey == nil {
+		return localVarReturnValue, nil, reportError("xApiKey is required and must be specified")
+	}
+	if r.xApiSecret == nil {
+		return localVarReturnValue, nil, reportError("xApiSecret is required and must be specified")
+	}
+	if r.beSdkRunEmailCampaignRequest == nil {
+		return localVarReturnValue, nil, reportError("beSdkRunEmailCampaignRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	parameterAddToHeaderOrQuery(localVarHeaderParams, "x-api-key", r.xApiKey, "")
+	parameterAddToHeaderOrQuery(localVarHeaderParams, "x-api-secret", r.xApiSecret, "")
+	// body params
+	localVarPostBody = r.beSdkRunEmailCampaignRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["api_key"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["x-api-key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ResponsesErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiRunPushCampaignRequest struct {
+	ctx context.Context
+	ApiService *DefaultApiService
+	xApiKey *string
+	xApiSecret *string
+	beSdkRunPushCampaignRequest *BeSdkRunPushCampaignRequest
+}
+
+func (r ApiRunPushCampaignRequest) XApiKey(xApiKey string) ApiRunPushCampaignRequest {
+	r.xApiKey = &xApiKey
+	return r
+}
+
+func (r ApiRunPushCampaignRequest) XApiSecret(xApiSecret string) ApiRunPushCampaignRequest {
+	r.xApiSecret = &xApiSecret
+	return r
+}
+
+func (r ApiRunPushCampaignRequest) BeSdkRunPushCampaignRequest(beSdkRunPushCampaignRequest BeSdkRunPushCampaignRequest) ApiRunPushCampaignRequest {
+	r.beSdkRunPushCampaignRequest = &beSdkRunPushCampaignRequest
+	return r
+}
+
+func (r ApiRunPushCampaignRequest) Execute() (*ResponsesSuccessResponse, *http.Response, error) {
+	return r.ApiService.RunPushCampaignExecute(r)
+}
+
+/*
+RunPushCampaign Method for RunPushCampaign
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiRunPushCampaignRequest
+*/
+func (a *DefaultApiService) RunPushCampaign(ctx context.Context) ApiRunPushCampaignRequest {
+	return ApiRunPushCampaignRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return ResponsesSuccessResponse
+func (a *DefaultApiService) RunPushCampaignExecute(r ApiRunPushCampaignRequest) (*ResponsesSuccessResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponsesSuccessResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultApiService.RunPushCampaign")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/campaigns/push/run"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.xApiKey == nil {
+		return localVarReturnValue, nil, reportError("xApiKey is required and must be specified")
+	}
+	if r.xApiSecret == nil {
+		return localVarReturnValue, nil, reportError("xApiSecret is required and must be specified")
+	}
+	if r.beSdkRunPushCampaignRequest == nil {
+		return localVarReturnValue, nil, reportError("beSdkRunPushCampaignRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	parameterAddToHeaderOrQuery(localVarHeaderParams, "x-api-key", r.xApiKey, "")
+	parameterAddToHeaderOrQuery(localVarHeaderParams, "x-api-secret", r.xApiSecret, "")
+	// body params
+	localVarPostBody = r.beSdkRunPushCampaignRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["api_key"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["x-api-key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ResponsesErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateUserProfileRequest struct {
+	ctx context.Context
+	ApiService *DefaultApiService
+	xApiKey *string
+	xApiSecret *string
+	beSdkUserProfileUpdateRequest *BeSdkUserProfileUpdateRequest
+}
+
+func (r ApiUpdateUserProfileRequest) XApiKey(xApiKey string) ApiUpdateUserProfileRequest {
+	r.xApiKey = &xApiKey
+	return r
+}
+
+func (r ApiUpdateUserProfileRequest) XApiSecret(xApiSecret string) ApiUpdateUserProfileRequest {
+	r.xApiSecret = &xApiSecret
+	return r
+}
+
+func (r ApiUpdateUserProfileRequest) BeSdkUserProfileUpdateRequest(beSdkUserProfileUpdateRequest BeSdkUserProfileUpdateRequest) ApiUpdateUserProfileRequest {
+	r.beSdkUserProfileUpdateRequest = &beSdkUserProfileUpdateRequest
+	return r
+}
+
+func (r ApiUpdateUserProfileRequest) Execute() (*ResponsesSuccessResponse, *http.Response, error) {
+	return r.ApiService.UpdateUserProfileExecute(r)
+}
+
+/*
+UpdateUserProfile Method for UpdateUserProfile
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiUpdateUserProfileRequest
+*/
+func (a *DefaultApiService) UpdateUserProfile(ctx context.Context) ApiUpdateUserProfileRequest {
+	return ApiUpdateUserProfileRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return ResponsesSuccessResponse
+func (a *DefaultApiService) UpdateUserProfileExecute(r ApiUpdateUserProfileRequest) (*ResponsesSuccessResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponsesSuccessResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultApiService.UpdateUserProfile")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/users/profile"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.xApiKey == nil {
+		return localVarReturnValue, nil, reportError("xApiKey is required and must be specified")
+	}
+	if r.xApiSecret == nil {
+		return localVarReturnValue, nil, reportError("xApiSecret is required and must be specified")
+	}
+	if r.beSdkUserProfileUpdateRequest == nil {
+		return localVarReturnValue, nil, reportError("beSdkUserProfileUpdateRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	parameterAddToHeaderOrQuery(localVarHeaderParams, "x-api-key", r.xApiKey, "")
+	parameterAddToHeaderOrQuery(localVarHeaderParams, "x-api-secret", r.xApiSecret, "")
+	// body params
+	localVarPostBody = r.beSdkUserProfileUpdateRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["api_key"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["x-api-key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ResponsesErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}

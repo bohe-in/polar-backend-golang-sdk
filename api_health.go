@@ -25,6 +25,12 @@ type HealthApiService service
 type ApiHealthRequest struct {
 	ctx context.Context
 	ApiService *HealthApiService
+	origin *string
+}
+
+func (r ApiHealthRequest) Origin(origin string) ApiHealthRequest {
+	r.origin = &origin
+	return r
 }
 
 func (r ApiHealthRequest) Execute() (*ResponsesSuccessResponse, *http.Response, error) {
@@ -82,6 +88,9 @@ func (a *HealthApiService) HealthExecute(r ApiHealthRequest) (*ResponsesSuccessR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.origin != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "Origin", r.origin, "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -132,6 +141,12 @@ func (a *HealthApiService) HealthExecute(r ApiHealthRequest) (*ResponsesSuccessR
 type ApiHealthOptionsRequest struct {
 	ctx context.Context
 	ApiService *HealthApiService
+	origin *string
+}
+
+func (r ApiHealthOptionsRequest) Origin(origin string) ApiHealthOptionsRequest {
+	r.origin = &origin
+	return r
 }
 
 func (r ApiHealthOptionsRequest) Execute() (*ResponsesSuccessResponse, *http.Response, error) {
@@ -188,6 +203,9 @@ func (a *HealthApiService) HealthOptionsExecute(r ApiHealthOptionsRequest) (*Res
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.origin != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "Origin", r.origin, "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

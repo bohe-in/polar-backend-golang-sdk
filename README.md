@@ -78,6 +78,9 @@ All URIs are relative to *http://localhost*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *DefaultApi* | [**CreateLink**](docs/DefaultApi.md#createlink) | **Post** /api/v1/links | 
+*DefaultApi* | [**RunEmailCampaign**](docs/DefaultApi.md#runemailcampaign) | **Post** /api/v1/campaigns/email/run | 
+*DefaultApi* | [**RunPushCampaign**](docs/DefaultApi.md#runpushcampaign) | **Post** /api/v1/campaigns/push/run | 
+*DefaultApi* | [**UpdateUserProfile**](docs/DefaultApi.md#updateuserprofile) | **Post** /api/v1/users/profile | 
 *HealthApi* | [**Health**](docs/HealthApi.md#health) | **Get** /api/v1/health/ | 
 *HealthApi* | [**HealthOptions**](docs/HealthApi.md#healthoptions) | **Options** /api/v1/health/ | 
 
@@ -85,6 +88,9 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [BeSdkCreateLinkRequest](docs/BeSdkCreateLinkRequest.md)
+ - [BeSdkRunEmailCampaignRequest](docs/BeSdkRunEmailCampaignRequest.md)
+ - [BeSdkRunPushCampaignRequest](docs/BeSdkRunPushCampaignRequest.md)
+ - [BeSdkUserProfileUpdateRequest](docs/BeSdkUserProfileUpdateRequest.md)
  - [RequestsLinkAnalyticTags](docs/RequestsLinkAnalyticTags.md)
  - [RequestsLinkRedirects](docs/RequestsLinkRedirects.md)
  - [RequestsLinkSocialMediaTags](docs/RequestsLinkSocialMediaTags.md)

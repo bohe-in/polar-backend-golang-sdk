@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Code** | Pointer to **string** |  | [optional] 
+**Details** | Pointer to **interface{}** |  | [optional] 
 **Message** | Pointer to **string** |  | [optional] 
 **StatusCode** | Pointer to **int32** |  | [optional] 
 
@@ -52,6 +53,41 @@ SetCode sets Code field to given value.
 
 HasCode returns a boolean if a field has been set.
 
+### GetDetails
+
+`func (o *ResponsesErrorDetails) GetDetails() interface{}`
+
+GetDetails returns the Details field if non-nil, zero value otherwise.
+
+### GetDetailsOk
+
+`func (o *ResponsesErrorDetails) GetDetailsOk() (*interface{}, bool)`
+
+GetDetailsOk returns a tuple with the Details field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDetails
+
+`func (o *ResponsesErrorDetails) SetDetails(v interface{})`
+
+SetDetails sets Details field to given value.
+
+### HasDetails
+
+`func (o *ResponsesErrorDetails) HasDetails() bool`
+
+HasDetails returns a boolean if a field has been set.
+
+### SetDetailsNil
+
+`func (o *ResponsesErrorDetails) SetDetailsNil(b bool)`
+
+ SetDetailsNil sets the value for Details to be an explicit nil
+
+### UnsetDetails
+`func (o *ResponsesErrorDetails) UnsetDetails()`
+
+UnsetDetails ensures that no value is present for Details, not even an explicit nil
 ### GetMessage
 
 `func (o *ResponsesErrorDetails) GetMessage() string`

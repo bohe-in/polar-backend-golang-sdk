@@ -6,12 +6,199 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/v1/campaigns/email/run": {
+            "post": {
+                "operationId": "RunEmailCampaign",
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-api-secret",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "campaignUnid": {
+                                        "type": "string"
+                                    }
+                                },
+                                "title": "BeSdkRunEmailCampaignRequest",
+                                "required": [
+                                    "campaignUnid"
+                                ]
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponsesSuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponsesErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-amazon-apigateway-integration": {
+                    "type": "http",
+                    "uri": "http://${stageVariables.url}/api/v1/campaigns/email/run",
+                    "httpMethod": "post",
+                    "requestParameters": {
+                        "integration.request.header.api-gtway-ip": "context.identity.sourceIp",
+                        "integration.request.header.x-api-key": "context.identity.apiKey",
+                        "integration.request.header.x-api-secret": "method.request.header.x-api-secret"
+                    },
+                    "responses": {
+                        "200": {
+                            "statusCode": "200",
+                            "responseParameters": {}
+                        },
+                        "400": {
+                            "statusCode": "400",
+                            "responseParameters": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/campaigns/push/run": {
+            "post": {
+                "operationId": "RunPushCampaign",
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-api-secret",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "campaignUnid": {
+                                        "type": "string"
+                                    }
+                                },
+                                "title": "BeSdkRunPushCampaignRequest",
+                                "required": [
+                                    "campaignUnid"
+                                ]
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponsesSuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponsesErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-amazon-apigateway-integration": {
+                    "type": "http",
+                    "uri": "http://${stageVariables.url}/api/v1/campaigns/push/run",
+                    "httpMethod": "post",
+                    "requestParameters": {
+                        "integration.request.header.api-gtway-ip": "context.identity.sourceIp",
+                        "integration.request.header.x-api-key": "context.identity.apiKey",
+                        "integration.request.header.x-api-secret": "method.request.header.x-api-secret"
+                    },
+                    "responses": {
+                        "200": {
+                            "statusCode": "200",
+                            "responseParameters": {}
+                        },
+                        "400": {
+                            "statusCode": "400",
+                            "responseParameters": {}
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/health/": {
             "get": {
                 "tags": [
                     "Health"
                 ],
                 "operationId": "Health",
+                "parameters": [
+                    {
+                        "name": "Origin",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -91,6 +278,7 @@
                     "uri": "http://${stageVariables.url}/api/v1/health/",
                     "httpMethod": "get",
                     "requestParameters": {
+                        "integration.request.header.Origin": "method.request.header.Origin",
                         "integration.request.header.api-gtway-ip": "context.identity.sourceIp",
                         "integration.request.header.x-api-key": "context.identity.apiKey"
                     },
@@ -121,6 +309,15 @@
                     "Health"
                 ],
                 "operationId": "HealthOptions",
+                "parameters": [
+                    {
+                        "name": "Origin",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -200,6 +397,7 @@
                     "uri": "http://${stageVariables.url}/api/v1/health/",
                     "httpMethod": "options",
                     "requestParameters": {
+                        "integration.request.header.Origin": "method.request.header.Origin",
                         "integration.request.header.api-gtway-ip": "context.identity.sourceIp",
                         "integration.request.header.x-api-key": "context.identity.apiKey"
                     },
@@ -327,6 +525,102 @@
                     }
                 }
             }
+        },
+        "/api/v1/users/profile": {
+            "post": {
+                "operationId": "UpdateUserProfile",
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-api-secret",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "clobberMatchingAttributes": {
+                                        "type": "boolean"
+                                    },
+                                    "data": {
+                                        "type": "object",
+                                        "additionalProperties": {}
+                                    },
+                                    "userID": {
+                                        "type": "string"
+                                    }
+                                },
+                                "title": "BeSdkUserProfileUpdateRequest",
+                                "required": [
+                                    "data"
+                                ]
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponsesSuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponsesErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-amazon-apigateway-integration": {
+                    "type": "http",
+                    "uri": "http://${stageVariables.url}/api/v1/users/profile",
+                    "httpMethod": "post",
+                    "requestParameters": {
+                        "integration.request.header.api-gtway-ip": "context.identity.sourceIp",
+                        "integration.request.header.x-api-key": "context.identity.apiKey",
+                        "integration.request.header.x-api-secret": "method.request.header.x-api-secret"
+                    },
+                    "responses": {
+                        "200": {
+                            "statusCode": "200",
+                            "responseParameters": {}
+                        },
+                        "400": {
+                            "statusCode": "400",
+                            "responseParameters": {}
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -394,6 +688,7 @@
                     "code": {
                         "type": "string"
                     },
+                    "details": {},
                     "message": {
                         "type": "string"
                     },
