@@ -601,10 +601,15 @@ components:
     BeSdkRunEmailCampaignRequest:
       example:
         userUnid: userUnid
+        customData:
+          key: ""
         campaignUnid: campaignUnid
       properties:
         campaignUnid:
           type: string
+        customData:
+          additionalProperties: {}
+          type: object
         userUnid:
           type: string
       required:
@@ -615,10 +620,15 @@ components:
     BeSdkRunPushCampaignRequest:
       example:
         userUnid: userUnid
+        customData:
+          key: ""
         campaignUnid: campaignUnid
       properties:
         campaignUnid:
           type: string
+        customData:
+          additionalProperties: {}
+          type: object
         userUnid:
           type: string
       required:

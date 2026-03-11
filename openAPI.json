@@ -41,6 +41,10 @@
                                     "campaignUnid": {
                                         "type": "string"
                                     },
+                                    "customData": {
+                                        "type": "object",
+                                        "additionalProperties": {}
+                                    },
                                     "userUnid": {
                                         "type": "string"
                                     }
@@ -133,6 +137,10 @@
                                 "properties": {
                                     "campaignUnid": {
                                         "type": "string"
+                                    },
+                                    "customData": {
+                                        "type": "object",
+                                        "additionalProperties": {}
                                     },
                                     "userUnid": {
                                         "type": "string"

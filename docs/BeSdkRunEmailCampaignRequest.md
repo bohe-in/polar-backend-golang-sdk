@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CampaignUnid** | **string** |  | 
+**CustomData** | Pointer to **map[string]interface{}** |  | [optional] 
 **UserUnid** | **string** |  | 
 
 ## Methods
@@ -45,6 +46,31 @@ and a boolean to check if the value has been set.
 
 SetCampaignUnid sets CampaignUnid field to given value.
 
+
+### GetCustomData
+
+`func (o *BeSdkRunEmailCampaignRequest) GetCustomData() map[string]interface{}`
+
+GetCustomData returns the CustomData field if non-nil, zero value otherwise.
+
+### GetCustomDataOk
+
+`func (o *BeSdkRunEmailCampaignRequest) GetCustomDataOk() (*map[string]interface{}, bool)`
+
+GetCustomDataOk returns a tuple with the CustomData field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomData
+
+`func (o *BeSdkRunEmailCampaignRequest) SetCustomData(v map[string]interface{})`
+
+SetCustomData sets CustomData field to given value.
+
+### HasCustomData
+
+`func (o *BeSdkRunEmailCampaignRequest) HasCustomData() bool`
+
+HasCustomData returns a boolean if a field has been set.
 
 ### GetUserUnid
 

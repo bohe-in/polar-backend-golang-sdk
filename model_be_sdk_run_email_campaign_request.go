@@ -20,6 +20,7 @@ var _ MappedNullable = &BeSdkRunEmailCampaignRequest{}
 // BeSdkRunEmailCampaignRequest struct for BeSdkRunEmailCampaignRequest
 type BeSdkRunEmailCampaignRequest struct {
 	CampaignUnid string `json:"campaignUnid"`
+	CustomData map[string]interface{} `json:"customData,omitempty"`
 	UserUnid string `json:"userUnid"`
 }
 
@@ -66,6 +67,38 @@ func (o *BeSdkRunEmailCampaignRequest) SetCampaignUnid(v string) {
 	o.CampaignUnid = v
 }
 
+// GetCustomData returns the CustomData field value if set, zero value otherwise.
+func (o *BeSdkRunEmailCampaignRequest) GetCustomData() map[string]interface{} {
+	if o == nil || IsNil(o.CustomData) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.CustomData
+}
+
+// GetCustomDataOk returns a tuple with the CustomData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BeSdkRunEmailCampaignRequest) GetCustomDataOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.CustomData) {
+		return map[string]interface{}{}, false
+	}
+	return o.CustomData, true
+}
+
+// HasCustomData returns a boolean if a field has been set.
+func (o *BeSdkRunEmailCampaignRequest) HasCustomData() bool {
+	if o != nil && !IsNil(o.CustomData) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomData gets a reference to the given map[string]interface{} and assigns it to the CustomData field.
+func (o *BeSdkRunEmailCampaignRequest) SetCustomData(v map[string]interface{}) {
+	o.CustomData = v
+}
+
 // GetUserUnid returns the UserUnid field value
 func (o *BeSdkRunEmailCampaignRequest) GetUserUnid() string {
 	if o == nil {
@@ -101,6 +134,9 @@ func (o BeSdkRunEmailCampaignRequest) MarshalJSON() ([]byte, error) {
 func (o BeSdkRunEmailCampaignRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["campaignUnid"] = o.CampaignUnid
+	if !IsNil(o.CustomData) {
+		toSerialize["customData"] = o.CustomData
+	}
 	toSerialize["userUnid"] = o.UserUnid
 	return toSerialize, nil
 }
