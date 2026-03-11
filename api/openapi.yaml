@@ -600,12 +600,16 @@ components:
       type: object
     BeSdkRunEmailCampaignRequest:
       example:
+        userUnid: userUnid
         campaignUnid: campaignUnid
       properties:
         campaignUnid:
           type: string
+        userUnid:
+          type: string
       required:
       - campaignUnid
+      - userUnid
       title: BeSdkRunEmailCampaignRequest
       type: object
     BeSdkRunPushCampaignRequest:
