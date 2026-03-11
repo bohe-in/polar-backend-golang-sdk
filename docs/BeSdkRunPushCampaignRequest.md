@@ -5,12 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CampaignUnid** | **string** |  | 
+**UserUnid** | **string** |  | 
 
 ## Methods
 
 ### NewBeSdkRunPushCampaignRequest
 
-`func NewBeSdkRunPushCampaignRequest(campaignUnid string, ) *BeSdkRunPushCampaignRequest`
+`func NewBeSdkRunPushCampaignRequest(campaignUnid string, userUnid string, ) *BeSdkRunPushCampaignRequest`
 
 NewBeSdkRunPushCampaignRequest instantiates a new BeSdkRunPushCampaignRequest object
 This constructor will assign default values to properties that have it defined,
@@ -43,6 +44,26 @@ and a boolean to check if the value has been set.
 `func (o *BeSdkRunPushCampaignRequest) SetCampaignUnid(v string)`
 
 SetCampaignUnid sets CampaignUnid field to given value.
+
+
+### GetUserUnid
+
+`func (o *BeSdkRunPushCampaignRequest) GetUserUnid() string`
+
+GetUserUnid returns the UserUnid field if non-nil, zero value otherwise.
+
+### GetUserUnidOk
+
+`func (o *BeSdkRunPushCampaignRequest) GetUserUnidOk() (*string, bool)`
+
+GetUserUnidOk returns a tuple with the UserUnid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserUnid
+
+`func (o *BeSdkRunPushCampaignRequest) SetUserUnid(v string)`
+
+SetUserUnid sets UserUnid field to given value.
 
 
 

@@ -168,7 +168,7 @@ import (
 func main() {
     xApiKey := "xApiKey_example" // string | 
     xApiSecret := "xApiSecret_example" // string | 
-    beSdkRunPushCampaignRequest := *openapiclient.NewBeSdkRunPushCampaignRequest("CampaignUnid_example") // BeSdkRunPushCampaignRequest | 
+    beSdkRunPushCampaignRequest := *openapiclient.NewBeSdkRunPushCampaignRequest("CampaignUnid_example", "UserUnid_example") // BeSdkRunPushCampaignRequest | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

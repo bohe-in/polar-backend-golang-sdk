@@ -20,15 +20,17 @@ var _ MappedNullable = &BeSdkRunPushCampaignRequest{}
 // BeSdkRunPushCampaignRequest struct for BeSdkRunPushCampaignRequest
 type BeSdkRunPushCampaignRequest struct {
 	CampaignUnid string `json:"campaignUnid"`
+	UserUnid string `json:"userUnid"`
 }
 
 // NewBeSdkRunPushCampaignRequest instantiates a new BeSdkRunPushCampaignRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBeSdkRunPushCampaignRequest(campaignUnid string) *BeSdkRunPushCampaignRequest {
+func NewBeSdkRunPushCampaignRequest(campaignUnid string, userUnid string) *BeSdkRunPushCampaignRequest {
 	this := BeSdkRunPushCampaignRequest{}
 	this.CampaignUnid = campaignUnid
+	this.UserUnid = userUnid
 	return &this
 }
 
@@ -64,6 +66,30 @@ func (o *BeSdkRunPushCampaignRequest) SetCampaignUnid(v string) {
 	o.CampaignUnid = v
 }
 
+// GetUserUnid returns the UserUnid field value
+func (o *BeSdkRunPushCampaignRequest) GetUserUnid() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.UserUnid
+}
+
+// GetUserUnidOk returns a tuple with the UserUnid field value
+// and a boolean to check if the value has been set.
+func (o *BeSdkRunPushCampaignRequest) GetUserUnidOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.UserUnid, true
+}
+
+// SetUserUnid sets field value
+func (o *BeSdkRunPushCampaignRequest) SetUserUnid(v string) {
+	o.UserUnid = v
+}
+
 func (o BeSdkRunPushCampaignRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -75,6 +101,7 @@ func (o BeSdkRunPushCampaignRequest) MarshalJSON() ([]byte, error) {
 func (o BeSdkRunPushCampaignRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["campaignUnid"] = o.CampaignUnid
+	toSerialize["userUnid"] = o.UserUnid
 	return toSerialize, nil
 }
 

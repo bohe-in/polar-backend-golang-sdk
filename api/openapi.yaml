@@ -614,12 +614,16 @@ components:
       type: object
     BeSdkRunPushCampaignRequest:
       example:
+        userUnid: userUnid
         campaignUnid: campaignUnid
       properties:
         campaignUnid:
           type: string
+        userUnid:
+          type: string
       required:
       - campaignUnid
+      - userUnid
       title: BeSdkRunPushCampaignRequest
       type: object
     BeSdkCreateLinkRequest:

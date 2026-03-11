@@ -133,11 +133,15 @@
                                 "properties": {
                                     "campaignUnid": {
                                         "type": "string"
+                                    },
+                                    "userUnid": {
+                                        "type": "string"
                                     }
                                 },
                                 "title": "BeSdkRunPushCampaignRequest",
                                 "required": [
-                                    "campaignUnid"
+                                    "campaignUnid",
+                                    "userUnid"
                                 ]
                             }
                         }
